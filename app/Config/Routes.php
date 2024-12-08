@@ -12,6 +12,7 @@ $routes->get('barang/create', 'BarangController::create');
 $routes->post('barang/store', 'BarangController::store');
 $routes->get('barang/edit/(:num)', 'BarangController::edit/$1');
 $routes->post('barang/update/(:num)', 'BarangController::update/$1');
+$routes->get('barang/show/(:num)', 'BarangController::show/$1');
 $routes->get('barang/delete/(:num)', 'BarangController::delete/$1');
 
 

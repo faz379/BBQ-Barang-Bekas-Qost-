@@ -41,7 +41,6 @@
                                         <th>No</th>
                                         <th>Gambar</th>
                                         <th>Nama Barang</th>
-                                        <th>Deskripsi</th>
                                         <th>Harga</th>
                                         <th>Status</th>
                                         <th>Kontak</th>
@@ -62,7 +61,6 @@
                                                 <?php endif; ?>
                                             </td>
                                             <td><?= htmlspecialchars($barang['nama_barang']) ?></td>
-                                            <td><?= htmlspecialchars(substr($barang['deskripsi'], 0, 50)) ?>...</td>
                                             <td>Rp. <?= number_format($barang['harga'], 0, ',', '.') ?></td>
                                             <td>
                                                 <span class="badge <?= $barang['status'] == 'Tersedia' ? 'badge-success' : 'badge-warning' ?>">
@@ -72,14 +70,9 @@
                                             <td><?= htmlspecialchars($barang['kontak']) ?></td>
                                             <td>
                                                 <div class="btn-group" role="group">
-                                                    <a href="<?= base_url('barang/edit/' . $barang['barang_id']) ?>" 
-                                                       class="btn btn-sm btn-primary">
-                                                        Edit
-                                                    </a>
-                                                    <a href="<?= base_url('barang/delete/' . $barang['barang_id']) ?>" 
-                                                       class="btn btn-sm btn-danger"
-                                                       onclick="return confirm('Yakin ingin menghapus barang ini?')">
-                                                        Hapus
+                                                    <a href="<?= base_url('barang/show/' . $barang['barang_id']) ?>" 
+                                                       class="btn btn-sm btn-warning">
+                                                        Detail
                                                     </a>
                                                 </div>
                                             </td>

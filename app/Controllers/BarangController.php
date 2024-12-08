@@ -74,52 +74,58 @@ class BarangController extends Controller
     }
 
     public function update($id)
-{
-    // Ambil data barang yang akan diupdate
-    $barang = $this->barangModel->find($id);
+    {
 
-    $validation = \Config\Services::validation();
-    $validation->setRules([
-        'image_path' => 'is_image[image_path]|max_size[image_path,2048]',
-        'nama_barang' => 'required|min_length[3]',
-        'deskripsi' => 'required',
-        'harga' => 'required|numeric',
-        'status' => 'required',
-        'kontak' => 'required'
-    ]);
+        $barang = $this->barangModel->find($id);
 
-    if (!$this->validate($validation->getRules())) {
-        return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
-    }
+        $validation = \Config\Services::validation();
+        $validation->setRules([
+            'image_path' => 'is_image[image_path]|max_size[image_path,2048]',
+            'nama_barang' => 'required|min_length[3]',
+            'deskripsi' => 'required',
+            'harga' => 'required|numeric',
+            'status' => 'required',
+            'kontak' => 'required'
+        ]);
 
-    $image = $this->request->getFile('image_path');
-
-    $dataUpdate = [
-        'nama_barang' => $this->request->getPost('nama_barang'),
-        'deskripsi' => $this->request->getPost('deskripsi'),
-        'harga' => $this->request->getPost('harga'),
-        'status' => $this->request->getPost('status'),
-        'kontak' => $this->request->getPost('kontak'),
-    ];
-
-    if ($image && $image->isValid() && !$image->hasMoved()) {
-
-        if (!empty($barang['image_path']) && file_exists('uploads/' . $barang['image_path'])) {
-            unlink('uploads/' . $barang['image_path']);
+        if (!$this->validate($validation->getRules())) {
+            return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
         }
 
-        $newName = $image->getRandomName();
-        $image->move('uploads', $newName);
-        $dataUpdate['image_path'] = $newName;
-    } else {
+        $image = $this->request->getFile('image_path');
 
-        $dataUpdate['image_path'] = $barang['image_path'];
+        $dataUpdate = [
+            'nama_barang' => $this->request->getPost('nama_barang'),
+            'deskripsi' => $this->request->getPost('deskripsi'),
+            'harga' => $this->request->getPost('harga'),
+            'status' => $this->request->getPost('status'),
+            'kontak' => $this->request->getPost('kontak'),
+        ];
+
+        if ($image && $image->isValid() && !$image->hasMoved()) {
+
+            if (!empty($barang['image_path']) && file_exists('uploads/' . $barang['image_path'])) {
+                unlink('uploads/' . $barang['image_path']);
+            }
+
+            $newName = $image->getRandomName();
+            $image->move('uploads', $newName);
+            $dataUpdate['image_path'] = $newName;
+        } else {
+
+            $dataUpdate['image_path'] = $barang['image_path'];
+        }
+
+        $this->barangModel->update($id, $dataUpdate);
+
+        return redirect()->to('/barang')->with('success', 'Barang berhasil diperbarui.');
     }
 
-    $this->barangModel->update($id, $dataUpdate);
-
-    return redirect()->to('/barang')->with('success', 'Barang berhasil diperbarui.');
-}
+    public function show($id)
+    {
+        $data['barang'] = $this->barangModel->find($id);
+        return view('barang-show', $data);
+    }
 
     public function delete($id)
     {
@@ -128,7 +134,7 @@ class BarangController extends Controller
         if (!empty($barang['image_path']) && file_exists('uploads/' . $barang['image_path'])) {
             unlink('uploads/'. $barang['image_path']);  
         }
-            
+
         $this->barangModel->delete($id);
         return redirect()->to('/barang')->with('success', 'Barang berhasil dihapus.');
     }
