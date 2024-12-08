@@ -4,15 +4,15 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class BarangModel extends Model
-{
-    protected $table = 'users';
+// class BarangModel extends Model
+// {
+//     protected $table = 'users';
 
-    protected $allowedFields = 
-    [
-        'username',
-        'email',
-        'password',
-        'role'
-    ];
-}
+//     protected $allowedFields = 
+//     [
+//         'username',
+//         'email',
+//         'password',
+//         'role'
+//     ];
+// }

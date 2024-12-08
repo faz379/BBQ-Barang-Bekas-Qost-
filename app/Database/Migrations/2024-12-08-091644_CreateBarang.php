@@ -60,7 +60,7 @@ class CreateBarang extends Migration
            ],
         ]);
         $this->forge->addKey('barang_id', true);
-        $this->forge->addForeignKey('user_id', 'users', 'user_id', 'SET NULL', 'SET NULL');
+        $this->forge->addForeignKey('user_id', 'users', 'id', 'SET NULL', 'SET NULL');
         $this->forge->addForeignKey('category_id', 'categories', 'category_id', 'SET NULL', 'SET NULL');
         $this->forge->createTable('barang');
 

@@ -15,5 +15,7 @@ $routes->post('barang/update/(:num)', 'BarangController::update/$1');
 $routes->get('barang/show/(:num)', 'BarangController::show/$1');
 $routes->get('barang/delete/(:num)', 'BarangController::delete/$1');
 
+service('auth')->routes($routes);
+
 
 $routes->get('db', 'TestController::index');
