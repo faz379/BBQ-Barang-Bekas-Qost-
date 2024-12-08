@@ -4,7 +4,7 @@ namespace App\Controllers;
 use CodeIgniter\Controller;
 use App\Models\BarangModel;
 
-class Barang extends Controller 
+class BarangController extends Controller 
 {
     protected $barangModel;
 
@@ -31,7 +31,7 @@ class Barang extends Controller
 
     public function store()
     {
-        // Validasi input
+
         $validation = \Config\Services::validation();
         $validation->setRules([
             'image_path' => 'uploaded[image_path]|is_image[image_path]|max_size[image_path,2048]',
@@ -50,10 +50,10 @@ class Barang extends Controller
 
         if ($image->isValid() && !$image->hasMoved()) {
             $newName = $image->getRandomName();
-            $image->move('uploads', $newName); // Pindahkan file ke folder 'uploads'
+            $image->move('uploads', $newName); 
 
             $this->barangModel->save([
-                'image_path' => $newName, // Simpan nama file gambar
+                'image_path' => $newName, 
                 'nama_barang' => $this->request->getPost('nama_barang'),
                 'deskripsi' => $this->request->getPost('deskripsi'),
                 'harga' => $this->request->getPost('harga'),
@@ -75,7 +75,7 @@ class Barang extends Controller
 
     public function update($id)
     {
-        // Validasi input
+
         $validation = \Config\Services::validation();
         $validation->setRules([
             'image_path' => 'is_image[image_path]|max_size[image_path,2048]',
@@ -94,10 +94,10 @@ class Barang extends Controller
 
         if ($image && $image->isValid() && !$image->hasMoved()) {
             $newName = $image->getRandomName();
-            $image->move('uploads', $newName); // Pindahkan file ke folder 'uploads'
+            $image->move('uploads', $newName);
 
             $this->barangModel->update($id, [
-                'image_path' => $newName, // Simpan nama file gambar
+                'image_path' => $newName, 
                 'nama_barang' => $this->request->getPost('nama_barang'),
                 'deskripsi' => $this->request->getPost('deskripsi'),
                 'harga' => $this->request->getPost('harga'),
@@ -105,7 +105,7 @@ class Barang extends Controller
                 'kontak' => $this->request->getPost('kontak'),
             ]);
         } else {
-            // Jika tidak ada gambar baru, tetap gunakan data lama
+            
             $this->barangModel->update($id, [
                 'nama_barang' => $this->request->getPost('nama_barang'),
                 'deskripsi' => $this->request->getPost('deskripsi'),

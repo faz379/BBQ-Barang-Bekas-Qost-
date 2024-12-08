@@ -7,9 +7,11 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get('/', 'Home::index');
 
-$routes->get('barang', 'Barang::index');
-$routes->get('barang/create', 'Barang::create');
-$routes->post('barang/store', 'Barang::store');
+$routes->get('barang', 'BarangController::index');
+$routes->get('barang/create', 'BarangController::create');
+$routes->post('barang/store', 'BarangController::store');
+$routes->get('barang/edit/(:num)', 'BarangController::edit/$1');
+$routes->post('barang/update/(:num)', 'BarangController::update/$1');
 
 
 $routes->get('db', 'TestController::index');
