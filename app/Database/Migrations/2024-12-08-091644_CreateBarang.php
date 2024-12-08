@@ -27,6 +27,10 @@ class CreateBarang extends Migration
                 'unsigned' => true,
                 'null' => true,
             ],
+            'kategori' => [
+                'type' => 'VARCHAR',
+                'constraint' => 50,
+            ],
             'image_path' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255,

@@ -28,7 +28,7 @@ class Database extends Config
         'DSN'          => '',
         'hostname'     => '127.0.0.1',
         'username'     => 'root',
-        'password'     => 'test',
+        'password'     => 'alsya12345',
         'database'     => 'db_bbq',
         'DBDriver'     => 'MySQLi',
         'DBPrefix'     => '',

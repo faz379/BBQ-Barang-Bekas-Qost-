@@ -129,6 +129,23 @@
                                        value="<?= old('kontak', $barang['kontak']) ?>" 
                                        required>
                             </div>
+                            
+                            <div class="form-group">
+                                <label for="category_id">
+                                    <i class="fas fa-list mr-2"></i>Kategori
+                                </label>
+                                <select class="form-control" 
+                                        id="category_id" 
+                                        name="category_id" 
+                                        required>
+                                    <option value="">Pilih Kategori</option>
+                                    <?php foreach ($categories as $category): ?>
+                                        <option value="<?= $category['category_id'] ?>" <?= old('category_id') == $category['category_id'] ? 'selected' : '' ?>>
+                                            <?= htmlspecialchars($category['nama_kategori']) ?> <!-- Ganti 'kategori' dengan nama kolom yang sesuai -->
+                                        </option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
 
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary btn-block">

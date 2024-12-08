@@ -79,7 +79,7 @@
                                           required><?= old('deskripsi') ?></textarea>
                             </div>
 
-                            <div class="form-group">
+ <div class="form-group">
                                 <label for="harga">
                                     <i class="fas fa-money-bill-wave mr-2"></i>Harga
                                 </label>
@@ -129,6 +129,23 @@
                             </div>
 
                             <div class="form-group">
+                                <label for="category_id">
+                                    <i class="fas fa-list mr-2"></i>Kategori
+                                </label>
+                                <select class="form-control" 
+                                        id="category_id" 
+                                        name="category_id" 
+                                        required>
+                                    <option value="">Pilih Kategori</option>
+                                    <?php foreach ($categories as $category): ?>
+                                        <option value="<?= $category['category_id'] ?>" <?= old('category_id') == $category['category_id'] ? 'selected' : '' ?>>
+                                            <?= htmlspecialchars($category['nama_kategori']) ?> <!-- Ganti 'kategori' dengan nama kolom yang sesuai -->
+                                        </option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
                                 <button type="submit" class="btn btn-primary btn-block">
                                     <i class="fas fa-save mr-2"></i>Simpan Barang
                                 </button>
@@ -145,7 +162,7 @@
 
     <!-- JavaScript -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     
     <script>
