@@ -30,7 +30,7 @@
                 <div class="card shadow">
                     <div class="card-header bg-primary text-white">
                         <h4 class="mb-0">
-                            <i class="fas fa-plus-circle mr-2"></i>Edit Barang Anda
+                            <i class="fas fa-edit mr-2"></i>Edit Barang Anda
                         </h4>
                     </div>
                     <div class="card-body">
@@ -46,12 +46,14 @@
                                            class="custom-file-input" 
                                            id="image_path" 
                                            name="image_path" 
-                                           accept="image/*" 
-                                           required>
+                                           accept="image/*">
                                     <label class="custom-file-label" for="image_path">
-                                        Pilih Gambar
+                                        <?= $barang['image_path'] ? $barang['image_path'] : 'Pilih Gambar' ?>
                                     </label>
                                 </div>
+                                <?php if($barang['image_path']): ?>
+                                    <small class="text-muted">Gambar saat ini: <?= $barang['image_path'] ?></small>
+                                <?php endif; ?>
                             </div>
 
                             <div class="form-group">
@@ -63,7 +65,7 @@
                                        id="nama_barang" 
                                        name="nama_barang" 
                                        placeholder="Masukkan Nama Barang" 
-                                       value="<?= old('nama_barang') ?>" 
+                                       value="<?= old('nama_barang', $barang['nama_barang']) ?>" 
                                        required>
                             </div>
 
@@ -76,7 +78,7 @@
                                           name="deskripsi" 
                                           rows="4" 
                                           placeholder="Masukkan Deskripsi Barang" 
-                                          required><?= old('deskripsi') ?></textarea>
+                                          required><?= old('deskripsi', $barang['deskripsi']) ?></textarea>
                             </div>
 
                             <div class="form-group">
@@ -92,7 +94,7 @@
                                            id="harga" 
                                            name="harga" 
                                            placeholder="Masukkan Harga" 
-                                           value="<?= old('harga') ?>" 
+                                           value="<?= old('harga', $barang['harga']) ?>" 
                                            required>
                                 </div>
                             </div>
@@ -106,10 +108,10 @@
                                         name="status" 
                                         required>
                                     <option value="">Pilih Status</option>
-                                    <option value="Tersedia" <?= old('status') == 'Tersedia' ? 'selected' : '' ?>>
+                                    <option value="Tersedia" <?= old('status', $barang['status']) == 'Tersedia' ? 'selected' : '' ?>>
                                         Tersedia
                                     </option>
-                                    <option value="Habis" <?= old('status') == 'Habis' ? 'selected' : '' ?>>
+                                    <option value="Habis" <?= old('status', $barang['status']) == 'Habis' ? 'selected' : '' ?>>
                                         Habis
                                     </option>
                                 </select>
@@ -124,7 +126,7 @@
                                        id="kontak" 
                                        name="kontak" 
                                        placeholder="Masukkan Nomor Telepon/WA" 
-                                       value="<?= old('kontak') ?>" 
+                                       value="<?= old('kontak', $barang['kontak']) ?>" 
                                        required>
                             </div>
 
