@@ -18,9 +18,11 @@ class BarangController extends Controller
 
     public function index()
     {
+        $user_id = auth()->id();
+        
         $pager = \Config\Services::pager();
         $data = [
-            'barangs' => $this->barangModel->getBarangsWithCategories(), // Ambil barang dengan kategori
+            'barangs' => $this->barangModel->where('user_id', $user_id)->getBarangsWithCategories(),
             'pager' => $pager
         ];
 
@@ -69,7 +71,7 @@ class BarangController extends Controller
             $image->move('uploads', $newName); 
     
             // Ambil user_id dari sesi
-            $user_id = session()->get('user_id'); // Pastikan user_id disimpan di sesi saat login
+            $user_id = auth()->id();
     
             $this->barangModel->save([
                 'image_path' => $newName, 
@@ -78,7 +80,7 @@ class BarangController extends Controller
                 'harga' => $this->request->getPost('harga'),
                 'status' => $this->request->getPost('status'),
                 'kontak' => $this->request->getPost('kontak'),
-                'user_id' => $user_id, // Menyimpan user_id
+                'user_id' => $user_id,
                 'category_id' => $this->request->getPost('category_id'), // Menyimpan category_id
             ]);
     
@@ -91,6 +93,7 @@ class BarangController extends Controller
     public function edit($id)
     {
         $data['barang'] = $this->barangModel->find($id);
+
         $data['categories'] = $this->categoryModel->findAll(); // Ambil semua kategori
         return view('barang-edit', $data);
     }
@@ -113,6 +116,8 @@ class BarangController extends Controller
         if (!$this->validate($validation->getRules())) {
             return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
         }
+
+
 
         $image = $this->request->getFile('image_path');
 

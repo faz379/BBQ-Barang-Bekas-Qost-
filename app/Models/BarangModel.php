@@ -24,6 +24,7 @@ class BarangModel extends Model
 
     public function getBarangsWithCategories()
     {
+        
         return $this->select('barang.*, categories.nama_kategori')
                     ->join('categories', 'categories.category_id = barang.category_id', 'left')
                     ->paginate(10, 'barang');
