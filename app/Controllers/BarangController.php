@@ -153,6 +153,12 @@ class BarangController extends Controller
         return view('barang-show', $data);
     }
 
+    public function showHome($id)
+    {
+        $data['barang'] = $this->barangModel->find($id);
+        return view('barang-show-home', $data);
+    }
+
     public function delete($id)
     {
         $barang = $this->barangModel->find($id);

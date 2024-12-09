@@ -100,7 +100,7 @@
             <a href="#">BarangBekasQost</a>
         </div>
         <ul>
-            <li><a href="#">Home</a></li>
+            <li><a href="/">Home</a></li>
             <li><a href="../barang">Products</a></li>
             <li><a href="../logout">Logout</a></li>
         </ul>
@@ -118,7 +118,7 @@
             <h2 class="product-title"><?= $barang['nama_barang'] ?></h2>
             <p class="product-price">Rp <?= number_format($barang['harga'], 0, ',', '.') ?></p>
             <p class="product-description"><?= $barang['deskripsi'] ?></p>
-            <a href="<?= site_url('barang/show/' . $barang['barang_id']) ?>" class="btn">View Details</a>
+            <a href="<?= site_url('barang/showHome/' . $barang['barang_id']) ?>" class="btn">View Details</a>
         </div>
         <?php endforeach; ?>
     </div>
